@@ -1,0 +1,3 @@
+<div>
+	DELETE PERMISSION
+</div>
