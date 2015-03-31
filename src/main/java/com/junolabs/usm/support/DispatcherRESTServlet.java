@@ -3,7 +3,6 @@ package com.junolabs.usm.support;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -20,14 +19,27 @@ import org.codehaus.jackson.map.ObjectMapper;
 @WebServlet("/api/*")
 public class DispatcherRESTServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	private static final String PACKAGE = "com.junolabs.usm.controllers.rest.";
 	private static final String REST_CONTROLLER = "RESTController";
 
-	private static final long serialVersionUID = 1L;
+	private static final String SHOW = "Show";
+	private static final String LIST = "List";
+	private static final String CREATE = "Create";
+	private static final String EDIT = "Edit";
+	private static final String EDIT_VALUE = "EditValue";
+	private static final String DELETE = "Delete";
+
+	// --------------------------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------------------------
 
 	public DispatcherRESTServlet() {
 		super();
 	}
+
+	// --------------------------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------------------------
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String httpVerb = request.getMethod();
@@ -36,17 +48,14 @@ public class DispatcherRESTServlet extends HttpServlet {
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------------------------
 
 	private void proccessRequest(HTTPMethod httpMethod, HttpServletRequest request, HttpServletResponse response) {
 
 		RESTRequest restRequest = this.getRESTRequest(request);
 
 		try {
-			String className = PACKAGE + restRequest.getResource() + REST_CONTROLLER;
-			Class<?> concreteClass = Class.forName(className);
-			Object controller = concreteClass.newInstance();
-			Method method = concreteClass.getMethod("callOperation", HTTPMethod.class, RESTRequest.class);
-			ResponseProccess pesponseProccess = (ResponseProccess) (method.invoke(controller, httpMethod, restRequest));
+			ResponseProccess pesponseProccess = this.callOperation(httpMethod, restRequest);
 
 			response.setContentType("application/json");
 			PrintWriter out = response.getWriter();
@@ -56,23 +65,10 @@ public class DispatcherRESTServlet extends HttpServlet {
 
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
 		}
 	}
 
+	// --------------------------------------------------------------------------------------------------------------------
 	// --------------------------------------------------------------------------------------------------------------------
 
 	private RESTRequest getRESTRequest(HttpServletRequest request) {
@@ -127,6 +123,60 @@ public class DispatcherRESTServlet extends HttpServlet {
 		restRequest.setQueryParams(params);
 
 		return restRequest;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------------------------
+
+	/**
+	 * Según httpMethod, llama a la operación de render (o visualizacion de la
+	 * página) o a la de procesamiento
+	 */
+	private ResponseProccess callOperation(HTTPMethod httpMethod, RESTRequest restRequest) {
+
+		String methodName = getMethodName(httpMethod, restRequest);
+
+		try {
+			String className = PACKAGE + restRequest.getResource() + REST_CONTROLLER;
+			Class<?> concreteClass = Class.forName(className);
+			Object controller = concreteClass.newInstance();
+			Method method = concreteClass.getMethod(methodName, RESTRequest.class);
+			ResponseProccess responseProccess = (ResponseProccess) (method.invoke(controller, restRequest));
+
+			return responseProccess;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------------------------
+
+	/**
+	 * Retorna el nombre del metodo a llamar
+	 */
+	private String getMethodName(HTTPMethod httpMethod, RESTRequest restRequest) {
+
+		String methodName = "proccess";
+
+		if (httpMethod.equals(HTTPMethod.GET)) {
+			if (restRequest.getId() == null) {
+				methodName = methodName + LIST;
+			} else {
+				methodName = methodName + SHOW;
+			}
+		} else if (httpMethod.equals(HTTPMethod.POST)) {
+			methodName = methodName + CREATE;
+		} else if (httpMethod.equals(HTTPMethod.PUT)) {
+			methodName = methodName + EDIT;
+		} else if (httpMethod.equals(HTTPMethod.PATCH)) {
+			methodName = methodName + EDIT_VALUE;
+		} else if (httpMethod.equals(HTTPMethod.DELETE)) {
+			methodName = methodName + DELETE;
+		}
+
+		return methodName;
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------

@@ -1,15 +1,12 @@
 package com.junolabs.usm.controllers.rest;
 
-import java.io.IOException;
-
 import com.junolabs.usm.model.User;
 import com.junolabs.usm.support.RESTRequest;
 import com.junolabs.usm.support.ResponseProccess;
 
-public class UserRESTController extends RESTController {
+public class UserRESTController implements IRESTController {
 
-	@Override
-	protected ResponseProccess proccessShow(RESTRequest restRequest) throws IOException {
+	public ResponseProccess proccessShow(RESTRequest restRequest) {
 		User user = new User();
 		user.setFirstName("Leandro");
 		user.setLastName("Carrasco");
@@ -21,33 +18,23 @@ public class UserRESTController extends RESTController {
 		return responseProccess;
 	}
 
-	@Override
-	protected ResponseProccess proccessList(RESTRequest restRequest) throws IOException {
-		// TODO Auto-generated method stub
+	public ResponseProccess proccessList(RESTRequest restRequest) {
 		return null;
 	}
 
-	@Override
-	protected ResponseProccess proccessCreate(RESTRequest restRequest) throws IOException {
-		// TODO Auto-generated method stub
+	public ResponseProccess proccessCreate(RESTRequest restRequest) {
 		return null;
 	}
 
-	@Override
-	protected ResponseProccess proccessEdit(RESTRequest restRequest) throws IOException {
-		// TODO Auto-generated method stub
+	public ResponseProccess proccessEdit(RESTRequest restRequest) {
 		return null;
 	}
 
-	@Override
-	protected ResponseProccess proccessEditValue(RESTRequest restRequest) throws IOException {
-		// TODO Auto-generated method stub
+	public ResponseProccess proccessEditValue(RESTRequest restRequest) {
 		return null;
 	}
 
-	@Override
-	protected ResponseProccess proccessDelete(RESTRequest restRequest) throws IOException {
-		// TODO Auto-generated method stub
+	public ResponseProccess proccessDelete(RESTRequest restRequest) {
 		return null;
 	}
 
