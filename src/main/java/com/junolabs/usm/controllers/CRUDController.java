@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.junolabs.usm.support.HTTPMethod;
-import com.junolabs.usm.support.MVCRequest;
 import com.junolabs.usm.support.ResponseProccess;
+import com.junolabs.usm.support.web.MVCRequest;
 
 public abstract class CRUDController {
 

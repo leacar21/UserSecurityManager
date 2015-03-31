@@ -1,8 +1,8 @@
 package com.junolabs.usm.controllers.rest;
 
 import com.junolabs.usm.model.User;
-import com.junolabs.usm.support.RESTRequest;
 import com.junolabs.usm.support.ResponseProccess;
+import com.junolabs.usm.support.rest.RESTRequest;
 
 public class UserRESTController implements IRESTController {
 

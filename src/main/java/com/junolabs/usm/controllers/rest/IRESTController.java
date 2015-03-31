@@ -1,7 +1,7 @@
 package com.junolabs.usm.controllers.rest;
 
-import com.junolabs.usm.support.RESTRequest;
 import com.junolabs.usm.support.ResponseProccess;
+import com.junolabs.usm.support.rest.RESTRequest;
 
 public interface IRESTController {
 

@@ -1,4 +1,4 @@
-package com.junolabs.usm.support;
+package com.junolabs.usm.support.rest;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.map.ObjectMapper;
+
+import com.junolabs.usm.support.HTTPMethod;
+import com.junolabs.usm.support.ResponseProccess;
 
 @WebServlet("/api/*")
 public class DispatcherRESTServlet extends HttpServlet {

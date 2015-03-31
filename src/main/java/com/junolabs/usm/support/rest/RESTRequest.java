@@ -1,4 +1,4 @@
-package com.junolabs.usm.support;
+package com.junolabs.usm.support.rest;
 
 import java.io.BufferedReader;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.junolabs.usm.support;
+package com.junolabs.usm.support.web;
 
 public class MVCRequest {
 	private String controller;

@@ -14,8 +14,8 @@ import com.junolabs.usm.model.User;
 import com.junolabs.usm.persistence.dao.mysql.support.PersistenceError;
 import com.junolabs.usm.services.AccountManagerService;
 import com.junolabs.usm.support.HTTPMethod;
-import com.junolabs.usm.support.MVCRequest;
 import com.junolabs.usm.support.ResponseProccess;
+import com.junolabs.usm.support.web.MVCRequest;
 
 public class UserController extends CRUDController {
 

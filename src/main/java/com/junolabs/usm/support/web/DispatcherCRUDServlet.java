@@ -1,4 +1,4 @@
-package com.junolabs.usm.support;
+package com.junolabs.usm.support.web;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -11,6 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.junolabs.usm.support.HTTPMethod;
 
 @WebServlet("/crud/*")
 public class DispatcherCRUDServlet extends HttpServlet {
