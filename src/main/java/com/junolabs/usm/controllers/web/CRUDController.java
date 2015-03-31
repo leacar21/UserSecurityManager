@@ -1,4 +1,4 @@
-package com.junolabs.usm.controllers;
+package com.junolabs.usm.controllers.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
