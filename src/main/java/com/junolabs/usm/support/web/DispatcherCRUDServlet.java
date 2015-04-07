@@ -17,7 +17,7 @@ import com.junolabs.usm.support.HTTPMethod;
 @WebServlet("/crud/*")
 public class DispatcherCRUDServlet extends HttpServlet {
 
-	private static final String PACKAGE = "com.junolabs.usm.controllers.";
+	private static final String PACKAGE = "com.junolabs.usm.controllers.web.";
 	private static final String CONTROLLER = "Controller";
 
 	private static final long serialVersionUID = 1L;
