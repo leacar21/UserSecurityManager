@@ -19,15 +19,82 @@
 </head>
 <body>
 	<header class="row">
-		<h1 class="col-md-12">User Security Manager</h1>
+		<h1 class="col-md-12 large-margin">User Security Manager</h1>
 	</header>
 
 	<section class="row">
-		<div class="col-md-12">Contenido</div>
+		<div class="col-md-12">
+			
+			<!-- ==================================================================================================================== -->
+
+			<!-- Nav tabs -->
+			<div class="row large-margin">
+				<div class="col-md-12">
+
+					<ul class="nav nav-tabs" role="tablist">
+						<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Accounts</a></li>
+						<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Systems</a></li>
+					</ul>
+
+					<!-- =========================== TAB Accounts ============================= -->
+
+					<!-- Tab panes -->
+					<div class="tab-content gray-border-left gray-border-right gray-border-bottom">
+						<div role="tabpanel" class="tab-pane active" id="home">
+							<div class="row container large-margin-left large-padding-top large-margin-bottom">
+								<div class="col-md-12">
+									
+									<div class="filterContent" id="accountFilterForm" name="accountFilterForm">
+										<form class="row">
+											<div class="form-group col-md-3">
+												<label for="accountFilterUserNameInput">User Name</label>
+												<input type="text" class="form-control" id="accountFilterUserNameInput" placeholder="Enter User Name">
+											</div>
+											<div class="form-group col-md-3">
+												<label for="accountFilterFirstNameInput">First Name</label>
+												<input type="text" class="form-control" id="accountFilterFirstNameInput" placeholder="Enter First Name">
+											</div>
+											<div class="form-group col-md-3">
+												<label for="accountFilterLasNameInput">Last Name</label>
+												<input type="text" class="form-control" id="accountFilterLasNameInput" placeholder="Enter Last Name">
+											</div>
+											<div class="form-group col-md-3">
+												<label for="accountFilterEmailInput">Email</label>
+												<input type="email" class="form-control" id="accountFilterEmailInput" placeholder="Enter Email">
+											</div>
+										</form>
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+
+						<!-- =========================== TAB Systems ============================= -->
+
+						<div role="tabpanel" class="tab-pane" id="profile">
+							<div class="row container large-margin-left large-padding-top large-margin-bottom">
+								<div class="col-md-12">
+									Systems
+								</div>
+							</div>
+						</div>
+
+						<!-- ===================================================================== -->
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<!-- ==================================================================================================================== -->
+
+		</div>
 	</section>
 
 	<footer class="row">
-		<h5 class="col-md-12">Leandro Carrasco - 2015</h5>
+		<h5 class="col-md-12 large-margin">Leandro Carrasco - 2015</h5>
 	</footer>
 </body>
 </html>
