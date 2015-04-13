@@ -1,3 +1,0 @@
-<div>
-	EDIT USER
-</div>

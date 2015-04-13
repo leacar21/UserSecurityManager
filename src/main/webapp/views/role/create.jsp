@@ -1,3 +1,0 @@
-<div>
-	CREATE ROLE
-</div>

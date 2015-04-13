@@ -1,3 +1,0 @@
-<div>
-	LIST PERMISSION
-</div>

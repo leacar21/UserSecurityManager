@@ -1,0 +1,7 @@
+{
+  "name": "user -security-manager",
+  "version": "0.0.1",
+  "description": "Application for the management of user accounts and permissions of these on different systems",
+  "dependencies": {
+  }
+}

@@ -1,3 +1,0 @@
-<div>
-	LIST SYSTEM
-</div>

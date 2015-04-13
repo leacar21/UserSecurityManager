@@ -1,3 +1,0 @@
-<div>
-	CREATE SYSTEM
-</div>

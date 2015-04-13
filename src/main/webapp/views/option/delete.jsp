@@ -1,3 +1,0 @@
-<div>
-	DELETE OPTION
-</div>

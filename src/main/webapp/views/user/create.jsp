@@ -1,3 +1,0 @@
-<div>
-	CREATE USER
-</div>

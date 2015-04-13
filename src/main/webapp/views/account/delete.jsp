@@ -1,3 +1,0 @@
-<div>
-	DELETE ACCOUNT
-</div>
