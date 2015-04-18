@@ -42,16 +42,24 @@ gulp.task('jshint', function() {
 // para inyectarlos en el index.html
 var inject  = require('gulp-inject');
 var wiredep = require('wiredep').stream;
+var angularFilesort = require('gulp-angular-filesort');
 
 gulp.task('inject', function() {
-  var sources = gulp.src([ './app/scripts/**/*.js', './app/stylesheets/**/*.css' ]);
-  return gulp.src('index.html', { cwd: './app' })
-    .pipe(inject(sources, {
+  return gulp.src('index.html', {cwd: './app'})
+    .pipe(inject(
+      gulp.src(['./app/scripts/**/*.js']).pipe(angularFilesort()), {
       read: false,
       ignorePath: '/app'
     }))
+    .pipe(inject(
+      gulp.src(['./app/stylesheets/**/*.css']), {
+        read: false,
+        ignorePath: '/app'
+      }
+    ))
     .pipe(gulp.dest('./app'));
 });
+
 // Inyecta las librerias que instalemos vía Bower
 gulp.task('wiredep', function () {
   gulp.src('./app/index.html')
