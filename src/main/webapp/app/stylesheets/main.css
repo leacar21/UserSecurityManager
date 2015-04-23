@@ -1,4 +1,11 @@
+header {
+	background: blue;
+}
+
+footer {
+	background: blue;
+}
+
 body {
-  font-family: 'Raleway-Light';
-  font-size: 16px;
+
 }
