@@ -2,8 +2,6 @@ package com.junolabs.usm.persistence.dao;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.junolabs.usm.model.User;
 import com.junolabs.usm.persistence.dao.AbstractDAO;
 

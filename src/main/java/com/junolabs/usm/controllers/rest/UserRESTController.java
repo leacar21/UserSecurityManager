@@ -1,40 +1,36 @@
 package com.junolabs.usm.controllers.rest;
 
 import com.junolabs.usm.model.User;
-import com.junolabs.usm.support.ResponseProccess;
 import com.junolabs.usm.support.rest.RESTRequest;
+
 
 public class UserRESTController implements IRESTController {
 
-	public ResponseProccess proccessShow(RESTRequest restRequest) {
+	public Object proccessShow(RESTRequest restRequest) {
 		User user = new User();
 		user.setFirstName("Leandro");
 		user.setLastName("Carrasco");
 		user.setEmail("carrascoleandro@gmail.com");
-
-		ResponseProccess responseProccess = new ResponseProccess();
-		responseProccess.setData(user);
-		responseProccess.setErrorCode("");
-		return responseProccess;
+		return user;
 	}
 
-	public ResponseProccess proccessList(RESTRequest restRequest) {
+	public Object proccessList(RESTRequest restRequest) {
 		return null;
 	}
 
-	public ResponseProccess proccessCreate(RESTRequest restRequest) {
+	public Object proccessCreate(RESTRequest restRequest) {
 		return null;
 	}
 
-	public ResponseProccess proccessEdit(RESTRequest restRequest) {
+	public Object proccessEdit(RESTRequest restRequest) {
 		return null;
 	}
 
-	public ResponseProccess proccessEditValue(RESTRequest restRequest) {
+	public Object proccessEditValue(RESTRequest restRequest) {
 		return null;
 	}
 
-	public ResponseProccess proccessDelete(RESTRequest restRequest) {
+	public Object proccessDelete(RESTRequest restRequest) {
 		return null;
 	}
 

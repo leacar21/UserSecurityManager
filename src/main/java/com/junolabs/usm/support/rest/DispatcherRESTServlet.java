@@ -4,10 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
+import com.junolabs.usm.controllers.rest.IRESTController;
+import com.junolabs.usm.controllers.rest.UserRESTController;
 import com.junolabs.usm.support.HTTPMethod;
 import com.junolabs.usm.support.ResponseProccess;
 
@@ -34,6 +38,17 @@ public class DispatcherRESTServlet extends HttpServlet {
 	private static final String EDIT_VALUE = "EditValue";
 	private static final String DELETE = "Delete";
 
+	//--------------------------------------------------------------------------------------------------
+	
+	private static final String RESOURCE_USER = "User";
+	
+	@Inject
+	private UserRESTController userRESTController;
+	
+	private Map<String, IRESTController> mapControllers = new HashMap<String, IRESTController>();
+	
+	//--------------------------------------------------------------------------------------------------
+	
 	// --------------------------------------------------------------------------------------------------------------------
 	// --------------------------------------------------------------------------------------------------------------------
 
@@ -41,9 +56,15 @@ public class DispatcherRESTServlet extends HttpServlet {
 		super();
 	}
 
+	@Override
+	public void init(){
+		mapControllers.put(RESOURCE_USER, userRESTController);
+	}
+	
 	// --------------------------------------------------------------------------------------------------------------------
 	// --------------------------------------------------------------------------------------------------------------------
 
+	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String httpVerb = request.getMethod();
 		HTTPMethod httpMethod = HTTPMethod.valueOf(httpVerb);
@@ -58,7 +79,7 @@ public class DispatcherRESTServlet extends HttpServlet {
 		RESTRequest restRequest = this.getRESTRequest(request);
 
 		try {
-			ResponseProccess pesponseProccess = this.callOperation(httpMethod, restRequest);
+			Object pesponseProccess = this.callOperation(httpMethod, restRequest);
 
 			response.setContentType("application/json");
 			PrintWriter out = response.getWriter();
@@ -132,19 +153,19 @@ public class DispatcherRESTServlet extends HttpServlet {
 	// --------------------------------------------------------------------------------------------------------------------
 
 	/**
-	 * SegÃºn httpMethod, llama a la operaciÃ³n de render (o visualizacion de la
-	 * pÃ¡gina) o a la de procesamiento
+	 * Según httpMethod, llama a la operación de render (o visualizacion de la
+	 * página) o a la de procesamiento
 	 */
-	private ResponseProccess callOperation(HTTPMethod httpMethod, RESTRequest restRequest) {
+	private Object callOperation(HTTPMethod httpMethod, RESTRequest restRequest) {
 
 		String methodName = getMethodName(httpMethod, restRequest);
-
+		
 		try {
 			String className = PACKAGE + restRequest.getResource() + REST_CONTROLLER;
 			Class<?> concreteClass = Class.forName(className);
-			Object controller = concreteClass.newInstance();
+			Object controller = mapControllers.get(restRequest.getResource()); //concreteClass.newInstance();
 			Method method = concreteClass.getMethod(methodName, RESTRequest.class);
-			ResponseProccess responseProccess = (ResponseProccess) (method.invoke(controller, restRequest));
+			Object responseProccess = (Object) (method.invoke(controller, restRequest));
 
 			return responseProccess;
 		} catch (Exception e) {
